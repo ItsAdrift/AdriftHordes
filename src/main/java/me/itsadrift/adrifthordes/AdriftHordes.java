@@ -23,7 +23,9 @@ public final class AdriftHordes extends JavaPlugin {
         pm.registerEvents(new MenuListener(), this);
         pm.registerEvents(new PagedMenuListener(), this);
 
-        getCommand("horde").setExecutor(new HordeCommand());
+        HordeCommand cmd = new HordeCommand();
+        getCommand("horde").setExecutor(cmd);
+        getCommand("horde").setTabCompleter(cmd);
 
     }
 
