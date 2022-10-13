@@ -7,9 +7,9 @@ mobs:
   basic:
     type: SKELETON
     name: "&7&lBASIC HORDE MOB"
-    items:
-      mainHand: {}
-      helmet: {}
-      chestplate: {}
-      leggings: {}
-      boots: {}
+    mainHand: { }
+    helmet: { }
+    chestplate: { }
+    leggings: { }
+    boots: { }
+locations: {}

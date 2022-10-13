@@ -1,6 +1,7 @@
 package me.itsadrift.adrifthordes;
 
 import me.itsadrift.adrifthordes.command.HordeCommand;
+import me.itsadrift.adrifthordes.horde.HordeManager;
 import me.itsadrift.adrifthordes.input.PlayerInputListener;
 import me.itsadrift.adrifthordes.input.PlayerInputManager;
 import me.itsadrift.adrifthordes.menu.MenuListener;
@@ -13,12 +14,15 @@ public final class AdriftHordes extends JavaPlugin {
 
     private static AdriftHordes instance;
 
+    private HordeManager hordeManager;
     private PlayerInputManager inputManager;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         instance = this;
+
+        hordeManager  = new HordeManager(this);
 
         inputManager = new PlayerInputManager(this);
 
@@ -30,7 +34,7 @@ public final class AdriftHordes extends JavaPlugin {
         pm.registerEvents(new PagedMenuListener(), this);
         pm.registerEvents(new PlayerInputListener(inputManager), this);
 
-        HordeCommand cmd = new HordeCommand();
+        HordeCommand cmd = new HordeCommand(this);
         getCommand("horde").setExecutor(cmd);
         getCommand("horde").setTabCompleter(cmd);
 
@@ -43,6 +47,10 @@ public final class AdriftHordes extends JavaPlugin {
 
     public static AdriftHordes getInstance() {
         return instance;
+    }
+
+    public HordeManager getHordeManager() {
+        return hordeManager;
     }
 
     public PlayerInputManager getInputManager() {

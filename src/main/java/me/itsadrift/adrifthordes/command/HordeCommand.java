@@ -1,5 +1,6 @@
 package me.itsadrift.adrifthordes.command;
 
+import me.itsadrift.adrifthordes.AdriftHordes;
 import me.itsadrift.adrifthordes.gui.MobCreatorMenu;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,19 +17,32 @@ import java.util.Locale;
 
 public class HordeCommand implements CommandExecutor, TabCompleter {
 
+    private AdriftHordes main;
+    public HordeCommand(AdriftHordes main) {
+        this.main = main;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
 
         // /horde createmob basic SKELETON
 
+        if (args.length == 1) {
+            if (!(sender instanceof Player)) {
+                return false;
+            }
+            Player player = (Player) sender;
+            if (args[0].equalsIgnoreCase("addLocation")) {
+                main.getHordeManager().addLocation(player.getLocation());
+            }
+        }
         if (args.length == 2) {
             if (args[0].equalsIgnoreCase("start")) {
                 String hordeID = args[1].toLowerCase(Locale.ROOT);
                 // confirm valid hordeID
             }
         } else if (args.length == 3) {
-            if (args[0].equals("cratemob")) {
+            if (args[0].equals("createmob")) {
                 String id = args[1];
 
                 if (isValidAsEntity(args[2])) {
@@ -51,7 +65,7 @@ public class HordeCommand implements CommandExecutor, TabCompleter {
         List<String> results = new ArrayList<>();
 
         if (args.length == 1) {
-            return StringUtil.copyPartialMatches(args[0], Arrays.asList("help", "createmob", "editmob", "removemob", "time", "start", "end"), new ArrayList<>());
+            return StringUtil.copyPartialMatches(args[0], Arrays.asList("help", "createmob", "editmob", "removemob", "time", "start", "end", "addLocation", "listLocations"), new ArrayList<>());
         } else if (args.length == 2) {
             if (args[0].equalsIgnoreCase("createmob")) {
                 results.add("<id>");
