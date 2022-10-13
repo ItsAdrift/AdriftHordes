@@ -18,7 +18,7 @@ import java.util.function.Consumer;
 
 public class Menu implements IMenu {
 
-    private Inventory inventory;
+    public Inventory inventory;
 
     private Map<Integer, MenuButton> buttonMap;
 
