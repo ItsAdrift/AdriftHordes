@@ -1,7 +1,7 @@
 name: AdriftHordes
 version: '${project.version}'
 main: me.itsadrift.adrifthordes.AdriftHordes
-api-version: 1.18
+#api-version: 1.18
 commands:
   horde:
     aliases: [h]

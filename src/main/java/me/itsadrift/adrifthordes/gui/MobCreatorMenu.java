@@ -28,10 +28,33 @@ public class MobCreatorMenu extends Menu {
             c.getPlayer().closeInventory();
 
             new PlayerChatInput(main.getInputManager(), c.getPlayer(), "\n&a&lEnter a name for the mob\n&f").send(response -> {
+                c.getPlayer().openInventory(inventory);
+                main.getConfig().set("mobs." + mobID + ".name", response);
+                main.saveConfig();
+            });
+        }), 0);
+
+        registerButton(new MenuButton(new ItemBuilder(MHFHeads.getHeadItem(type)).setDisplayName("&e&l" +mobID).setLore("&7Click to set name")).setWhenClicked(c -> {
+            save(type, mobID);
+            c.getPlayer().closeInventory();
+
+            new PlayerChatInput(main.getInputManager(), c.getPlayer(), "\n&a&lEnter a name for the mob\n&f").send(response -> {
+                c.getPlayer().openInventory(inventory);
                 main.getConfig().set("mobs." + mobID + ".name", response);
                 main.saveConfig();
             });
         }), 10);
+
+        registerButton(new MenuButton(new ItemBuilder(MHFHeads.getHeadItem(type)).setDisplayName("&c&lComing Soon").setLore("&7I don't have anything to put here yet")).setWhenClicked(c -> {
+            save(type, mobID);
+            c.getPlayer().closeInventory();
+
+            new PlayerChatInput(main.getInputManager(), c.getPlayer(), "\n&a&lEnter a name for the mob\n&f").send(response -> {
+                c.getPlayer().openInventory(inventory);
+                main.getConfig().set("mobs." + mobID + ".name", response);
+                main.saveConfig();
+            });
+        }), 19);
 
         registerButton(new MenuButton(new ItemBuilder(Material.DIAMOND_SWORD).setDisplayName("&eMain Hand")),3);
 
